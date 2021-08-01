@@ -147,22 +147,7 @@ const jeepStore = {
 // - that takes an array as a parameter
 // - returns an array of products that cost more than £1000
 
-// function filterExpensiveProducts(products) {
-//   const expensiveProducts = [];
-
-//   for (let i = 0; i < products.length; i++) {
-//     const product = products[i];
-//     const price = product.price;
-
-//     if (price >= 1000) {
-//       expensiveProducts.push(product);
-//     }
-//   }
-
-//   return expensiveProducts;
-// }
-
-// Array.prototype.filter()
+const expensiveProducts = appleStore.products.filter((captSteven) => captSteven.price >= 1000);
 
 // ----- Section -----
 
@@ -170,10 +155,8 @@ const jeepStore = {
 // - that takes an array as a parameter
 // - returns an array of products that cost less than £1000
 
-const cheapProducts = appleStore.products.filter(
-  (captSteven) => captSteven.price < 1000
-);
-console.log("cheapProducts: ", cheapProducts);
+const cheapProducts = appleStore.products.filter((captSteven) => captSteven.price < 1000);
+// console.log("cheapProducts: ", cheapProducts);
 
 // ----- Section ----- **
 
@@ -181,10 +164,8 @@ console.log("cheapProducts: ", cheapProducts);
 // - that takes an array as a parameter
 // - returns an array of products that have an incoming delivery
 
-const productsThatNeedToBeReceived = appleStore.products.filter(
-  (constEmmanuel) => constEmmanuel.stock.incomingDelivery === true
-);
-console.log("productsThatNeedToBeReceived: ", productsThatNeedToBeReceived);
+const productsThatNeedToBeReceived = appleStore.products.filter((product) => product.stock.incomingDelivery === true);
+// console.log("productsThatNeedToBeReceived: ", productsThatNeedToBeReceived);
 
 // ----- Section -----
 
@@ -192,10 +173,8 @@ console.log("productsThatNeedToBeReceived: ", productsThatNeedToBeReceived);
 // - that takes an array as a parameter
 // - returns an array of products that are out of stock
 
-const outOfStockProducts = appleStore.products.filter(
-  (kebab) => kebab.stock.quantity === 0
-);
-console.log("outOfStockProducts: ", outOfStockProducts);
+const outOfStockProducts = appleStore.products.filter((product) => product.stock.quantity === 0);
+// console.log("outOfStockProducts: ", outOfStockProducts);
 
 // ----- Section -----
 
@@ -203,12 +182,9 @@ console.log("outOfStockProducts: ", outOfStockProducts);
 // - that takes an array as a parameter
 // - returns an array of products that have a quantity that is less than 100 and have no incoming delivery
 
-const productsThatNeedToBeOrdered = appleStore.products.filter(
-  (kebab) =>
-    kebab.stock.quantity < 100 && kebab.stock.incomingDelivery === false
-);
-console.log("productsThatNeedToBeOrdered: ", productsThatNeedToBeOrdered);
-//
+const productsThatNeedToBeOrdered = appleStore.products.filter((product) =>
+    product.stock.quantity < 100 && product.stock.incomingDelivery === false);
+// console.log("productsThatNeedToBeOrdered: ", productsThatNeedToBeOrdered);
 
 // ----- Section ----- **
 
@@ -216,7 +192,8 @@ console.log("productsThatNeedToBeOrdered: ", productsThatNeedToBeOrdered);
 // - that takes an array as a parameter
 // - returns an array of products of the type "tablet"
 
-// const tablets = function();
+const tablets = appleStore.products.filter((product) => product.type === "tablet");
+// console.log("tablets: ", tablets);
 
 // ----- Section -----
 
@@ -224,15 +201,16 @@ console.log("productsThatNeedToBeOrdered: ", productsThatNeedToBeOrdered);
 // - that takes an array as a parameter
 // - returns an array of products of the type "computer"
 
-// const computers = function();
-
+const computer = appleStore.products.filter((product) => product.type === "computer");
+// console.log("computer: ", computer);
 // ----- Section ----- **
 
 // Write a function here...
 // - that takes an array as a parameter
 // - returns an object that represents an "iMac"
 
-// const iMac = function();
+const iMac = appleStore.products.find((product) => product.name === "iMac");
+// console.log("iMac: ", iMac);
 
 // ----- Section -----
 
@@ -240,7 +218,8 @@ console.log("productsThatNeedToBeOrdered: ", productsThatNeedToBeOrdered);
 // - that takes an array as a parameter
 // - returns an object that represents an "iPhone 12"
 
-// const iPhone12 = function();
+const iPhone12 = appleStore.products.find((product) => product.name === "iPhone 12");
+// console.log("iPhone12: ", iPhone12);
 
 // ----- Section -----
 
@@ -248,7 +227,9 @@ console.log("productsThatNeedToBeOrdered: ", productsThatNeedToBeOrdered);
 // - that takes an array as a parameter
 // - returns an object that represents an "iPad Mini"
 
-// const iPadMini = function();
+const iPadMini = appleStore.products.find((product) => product.name === "iPad mini");
+// console.log("iPadMini: ", iPadMini);
+
 
 // ----- CHALLENGE -----
 
@@ -257,7 +238,8 @@ console.log("productsThatNeedToBeOrdered: ", productsThatNeedToBeOrdered);
 // - returns an array of unique product types
 //    => ["mobile", "computer", "tablet"]
 
-// const productTypes = function();
+const productTypes = appleStore.products.map((product) => product.type === "mobile", "computer", "tablet");
+// console.log("productTypes: ", productTypes);
 
 // CART EXERCISES
 
@@ -302,7 +284,16 @@ const cart = [
 // - that takes an array as a parameter
 // - returns a number that rerpresents the total of the items in the cart
 
-// const totalPrice = function()
+const totalPrice = cart.map((item) => item.quantity * item.product.price);
+// console.log("totalPrice: ", totalPrice);
+
+// const totalCartPrice = totalPrice.reduce((a, b) => {
+//   return a + b;
+// });
+// console.log("totalCartPrice: ", totalCartPrice);
+const sumOfCartItems = (price, quantity) => price + quantity;
+const totalCartPrice = totalPrice.reduce();
+// console.log("totalCartPrice: ", totalCartPrice);
 
 // ----- Section ----- **
 
@@ -310,7 +301,14 @@ const cart = [
 // - that takes an array as a parameter
 // - returns a number that rerpresents the quantity of the items in the cart
 
-// const quantityOfItemsInCart = function()
+const cartQuantity = cart.map((item) => item.quantity);
+// console.log("cartQuantity: ", cartQuantity);
+
+const sumOfQuantity = (a, b) => a + b;
+
+const quantityOfItemsInCart = cartQuantity.reduce(sumOfQuantity);
+
+// console.log("quantityOfItemsInCart: ", quantityOfItemsInCart);
 
 // ----- Section ----- **
 
